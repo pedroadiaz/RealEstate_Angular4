@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RealEstate_Angular4.models;
 
 namespace RealEstate_Angular4
 {
@@ -30,6 +31,8 @@ namespace RealEstate_Angular4
         {
             // Add framework services.
             services.AddMvc();
+            services.AddDbContext<realestateContext>();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +54,9 @@ namespace RealEstate_Angular4
             }
 
             app.UseStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUi();
 
             app.UseMvc(routes =>
             {
