@@ -7,7 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { UserLoginComponent } from './components/userlogin/userlogin.component';
-
+import { ListingsComponent } from './components/listings/listings.component';
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -17,7 +17,8 @@ export const sharedConfig: NgModule = {
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        UserLoginComponent
+        UserLoginComponent,
+        ListingsComponent
     ],
     imports: [
         RouterModule.forRoot([
@@ -26,6 +27,7 @@ export const sharedConfig: NgModule = {
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'user-login', component: UserLoginComponent },
+            { path: 'listings', component: ListingsComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

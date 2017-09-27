@@ -46,9 +46,44 @@ namespace RealEstate_Angular4.Controllers
             return Ok(house);
         }
 
-        // PUT: api/House/5
+        //// PUT: api/House/5
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutHouse([FromRoute] int id, [FromBody] House house)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (id != house.Houseid)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    _context.Entry(house).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!HouseExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
+
+        // PUT: api/Houses/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHouse([FromRoute] int id, [FromBody] House house)
+        public IActionResult PutHouse([FromRoute] int id, [FromBody] House house)
         {
             if (!ModelState.IsValid)
             {
@@ -62,23 +97,9 @@ namespace RealEstate_Angular4.Controllers
 
             _context.Entry(house).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!HouseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _context.SaveChanges();
 
-            return NoContent();
+            return Ok(house);
         }
 
         // POST: api/House

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { sharedConfig } from './app.module.shared';
 
 import { UserLoginService } from './components/services/userlogin.service';
+import { ListingService } from './components/services/listing.service';
 
 @NgModule({
     bootstrap: sharedConfig.bootstrap,
@@ -17,6 +18,7 @@ import { UserLoginService } from './components/services/userlogin.service';
     ],
     providers: [
         UserLoginService,
+        ListingService,
         { provide: 'ORIGIN_URL', useValue: location.origin }
     ]
 })

@@ -16,6 +16,7 @@ import { PermissionType } from '../models/permission.type';
 export class UserLoginComponent implements OnInit {
     loading = false;
     model = new userlogin();
+    public errorOccurred: boolean;
 
     constructor(
         private route: ActivatedRoute,
@@ -26,10 +27,22 @@ export class UserLoginComponent implements OnInit {
 
     ngOnInit() {
         localStorage.removeItem('currentUser');
+        this.errorOccurred = false;
     }
 
     public login() {
+        this.errorOccurred = false;
         this.loading = true;
-        this.userloginService.login(this.model.username, this.model.password);
+        this.userloginService.login(this.model.username, this.model.password)
+            .then(logindata => {
+                this.model = logindata
+                this.router.navigate(['/listings']);
+            })
+            .catch(error => this.loginError(error));
+    }
+
+    private loginError(error: any) {
+        this.errorOccurred = true;
+        console.log(error);
     }
 }

@@ -2,17 +2,17 @@
 <div width="50%">
     <form (ngSubmit)="login()" ng-form="#loginForm">
         <h1>Sign up!</h1>
-        <div class="form-group">
+       <div class="alert alert-danger" *ngIf="errorOccurred">Invalid username or password</div>
+       <div class="form-group">
             <label for="username" class="control-label">Username</label>
-            <!--<input type="text" ngModel #username="ngModel" name="username" class="form-control" />-->
-            <input type="text" class="form-control" name="username" [(ngModel)]="model.username"/>
-            <div class="alert alert-danger" *ngIf="!username">Username is a required field.</div>
+            <input type="text" class="form-control" id="username" name="username" required [(ngModel)]="model.username" #username="ngModel"/>
+            <div class="alert alert-danger" *ngIf="!username.valid && username.touched">Username is a required field.</div>
         </div>
         <div class="form-group">
             <label for="password" class="control-label">Password</label>
-            <!--<input type="password" ngModel #password="ngModel" name="password" class="form-control" />-->
-            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" required/>
-        </div>
+            <input type="password" class="form-control" name="password" id="password" [(ngModel)]="model.password" required #password="ngModel"/>
+            <div class="alert alert-danger" *ngIf="!password.valid && password.touched">Password is a required field.</div>
+       </div>
         <div class="form-group">
             <button type="submit" title="Submit" class="btn btn-primary btn-lg">
                 Submit

@@ -46,6 +46,38 @@ namespace RealEstate_Angular4.Controllers
             return Ok(agent);
         }
 
+        [HttpGet("{userLoginId}/ByUserLoginId")]
+        public async Task<IActionResult> GetAgentByUserLoginId([FromRoute] int userLoginId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var agent = await _context.Agent.SingleOrDefaultAsync(m => m.UserLoginId == userLoginId);
+
+            if (agent == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(agent);
+        }
+
+        [HttpGet("{userLoginId}/GetHouses")]
+        public IEnumerable<House> GetHousesByAgent([FromRoute] int userLoginId)
+        {
+            List<House> houses = new List<House>();
+            Agent agent = _context.Agent.SingleOrDefault(m => m.UserLoginId == userLoginId);
+
+            if (agent != null)
+            {
+                houses = _context.House.Where(m => m.AgentId == agent.AgentId).ToList();
+            }
+
+            return houses;
+        }
+
         // PUT: api/Agents/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAgent([FromRoute] int id, [FromBody] Agent agent)
