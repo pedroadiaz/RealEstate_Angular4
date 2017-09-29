@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RealEstate_Angular4.models
 {
     public partial class House
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Houseid { get; set; }
         public int? PropertyTypeId { get; set; }
         public string Mls { get; set; }

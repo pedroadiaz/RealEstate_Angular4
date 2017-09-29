@@ -39,6 +39,9 @@
     <None Remove="ClientApp\app\components\services\listing.service.ts" />
     <None Remove="ClientApp\app\components\services\permission.type.ts" />
     <None Remove="ClientApp\app\components\services\userlogin.service.ts" />
+    <None Remove="ClientApp\app\components\shared\bathrooms.ts" />
+    <None Remove="ClientApp\app\components\shared\bedrooms.ts" />
+    <None Remove="ClientApp\app\components\shared\state.ts" />
     <None Remove="ClientApp\app\components\userlogin\userlogin.component.ts" />
     <None Remove="yarn.lock" />
 
@@ -54,6 +57,9 @@
     <TypeScriptCompile Include="ClientApp\app\components\models\permission.type.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\services\listing.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\services\userlogin.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\bathrooms.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\bedrooms.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\state.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\userlogin\userlogin.component.ts" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">

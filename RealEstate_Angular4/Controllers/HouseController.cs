@@ -102,9 +102,38 @@ namespace RealEstate_Angular4.Controllers
             return Ok(house);
         }
 
+        //// POST: api/House
+        //[HttpPost]
+        //public async Task<IActionResult> PostHouse([FromBody] House house)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    _context.House.Add(house);
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (HouseExists(house.Houseid))
+        //        {
+        //            return new StatusCodeResult(StatusCodes.Status409Conflict);
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return CreatedAtAction("GetHouse", new { id = house.Houseid }, house);
+        //}
+
         // POST: api/House
         [HttpPost]
-        public async Task<IActionResult> PostHouse([FromBody] House house)
+        public IActionResult PostHouse([FromBody] House house)
         {
             if (!ModelState.IsValid)
             {
@@ -114,7 +143,7 @@ namespace RealEstate_Angular4.Controllers
             _context.House.Add(house);
             try
             {
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (DbUpdateException)
             {
@@ -131,30 +160,58 @@ namespace RealEstate_Angular4.Controllers
             return CreatedAtAction("GetHouse", new { id = house.Houseid }, house);
         }
 
-        // DELETE: api/House/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteHouse([FromRoute] int id)
+    //    // DELETE: api/House/5
+    //    [HttpDelete("{id}")]
+    //    public async Task<IActionResult> DeleteHouse([FromRoute] int id)
+    //    {
+    //        if (!ModelState.IsValid)
+    //        {
+    //            return BadRequest(ModelState);
+    //        }
+
+    //        var house = await _context.House.SingleOrDefaultAsync(m => m.Houseid == id);
+    //        if (house == null)
+    //        {
+    //            return NotFound();
+    //        }
+
+    //        _context.House.Remove(house);
+    //        await _context.SaveChangesAsync();
+
+    //        return Ok(house);
+    //    }
+
+    //    private bool HouseExists(int id)
+    //    {
+    //        return _context.House.Any(e => e.Houseid == id);
+    //    }
+    //}
+
+    // DELETE: api/House/5
+    [HttpDelete("{id}")]
+    public IActionResult DeleteHouse([FromRoute] int id)
+    {
+        if (!ModelState.IsValid)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var house = await _context.House.SingleOrDefaultAsync(m => m.Houseid == id);
-            if (house == null)
-            {
-                return NotFound();
-            }
-
-            _context.House.Remove(house);
-            await _context.SaveChangesAsync();
-
-            return Ok(house);
+            return BadRequest(ModelState);
         }
 
-        private bool HouseExists(int id)
+        var house = _context.House.SingleOrDefault(m => m.Houseid == id);
+        if (house == null)
         {
-            return _context.House.Any(e => e.Houseid == id);
+            return NotFound();
         }
+
+        _context.House.Remove(house);
+        _context.SaveChanges();
+
+        return Ok();
     }
+
+    private bool HouseExists(int id)
+    {
+        return _context.House.Any(e => e.Houseid == id);
+    }
+}
+
 }

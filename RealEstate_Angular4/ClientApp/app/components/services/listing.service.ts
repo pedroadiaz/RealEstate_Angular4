@@ -57,6 +57,39 @@ export class ListingService {
 
     }
 
+    public CreateListing(newListing: listing): Promise<listing> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let url = '/api/House/';
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(url, JSON.stringify(newListing), options)
+            .toPromise()
+            .then(response => {
+                if (response.ok) {
+                    return response.json() as listing;
+                }
+                else {
+                    return null;
+                }
+            })
+            .catch(this.handleError);
+
+    }
+
+    public DeleteListing(deletedListing: listing) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let url = '/api/House/' + deletedListing.houseid;
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.delete(url, options)
+            .toPromise()
+            .then(response => {
+                return null;
+            })
+            .catch(this.handleError);
+
+    }
+
     private handleError(error: any) {
         console.log('An error occurred');
         return Promise.reject(error.message || error);

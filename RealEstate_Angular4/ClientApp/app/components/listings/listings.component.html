@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let listing of listings" (click)="onSelect(listing)">
-                <td>{{ listing.PropertyTypeId }}</td>
+                <td>{{ listing.propertyTypeId }}</td>
                 <td>{{ listing.streetAddress }}<br />{{ listing.city }}, {{ listing.state }} {{ listing.zipCode }}</td>
                 <td>{{ listing.bedrooms }}/{{ listing.bathrooms }}</td>
                 <td>{{ listing.description }}</td>
@@ -21,54 +21,126 @@
             </tr>
         </tbody>
     </table>
-
+    <button type="button" title="Cancel" class="btn btn-primary btn-lg"  (click)="addListing()" >Add New Listing</button>
     <div *ngIf="selectedListing">
         <form (ngSubmit)="onSubmit()" ng-form="#listingForm">
-            <div class="form-group">
-                <label for="mls">MLS</label>
-                <input name="mls" id="mls" type="text" [(ngModel)]="selectedListing.mls" />
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="mls">Property Type Id</label>
+                </div>
+                <div class="col-xs-10">
+                    <select id="propertyTypeId" name="propertyTypeId" [(ngModel)]="selectedListing.propertyTypeId">
+                        <option *ngFor="let key of propertypeNums; index as i" [value]="key">{{propertypeVals[i]}}</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="streetAddress">Street Address</label>
-                <input name="streetAddress" id="streetAddress" type="text" [(ngModel)]="selectedListing.streetAddress" />
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="mls">MLS</label>
+                </div>
+                <div class="col-xs-10">
+                    <input name="mls" id="mls" type="text" [(ngModel)]="selectedListing.mls" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="streetAddress2">Street Address 2</label>
-                <input name="streetAddress2" id="streetAddress2" type="text" [(ngModel)]="selectedListing.streetAddress2" />
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="streetAddress">Street Address</label>
+                </div>
+                <div class="col-xs-10">
+                    <input name="streetAddress" id="streetAddress" type="text" [(ngModel)]="selectedListing.streetAddress" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="city">City</label>
-                <input name="city" id="city" type="text" [(ngModel)]="selectedListing.city" />
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="streetAddress2">Street Address 2</label>
+                </div>
+                <div class="col-xs-10">
+                    <input name="streetAddress2" id="streetAddress2" type="text" [(ngModel)]="selectedListing.streetAddress2" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="state">State</label>
-                <input name="state" id="state" type="text" [(ngModel)]="selectedListing.state" />
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="city">City</label>
+                </div>
+                <div class="col-xs-10">
+                    <input name="city" id="city" type="text" [(ngModel)]="selectedListing.city" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="zipCode">Zip Code</label>
-                <input name="zipCode" id="zipCode" type="text" [(ngModel)]="selectedListing.zipCode" />
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="state">State</label>
+                </div>
+                <div class="col-xs-10">
+                    <select name="state" id="state" [(ngModel)]="selectedListing.state">
+                        <option *ngFor="let stateObj of stateList.states; index as i" [value]="stateObj.value">{{ stateObj.label }}</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="price">Price</label>
-                <input name="price" id="price" type="text" [(ngModel)]="selectedListing.price" />
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="state">State</label>
+                </div>
+                <div class="col-xs-10">
+                    <select name="bedrooms" id="bedrooms" [(ngModel)]="selectedListing.bedrooms">
+                        <option *ngFor="let i of beds.bedroomList" [value]="i">{{ i }}</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <input name="description" id="description" type="text" [(ngModel)]="selectedListing.description" />
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="state">State</label>
+                </div>
+                <div class="col-xs-10">
+                    <select name="bathrooms" id="bathrooms" [(ngModel)]="selectedListing.bathrooms">
+                        <option *ngFor="let num of baths.bathroomList" [value]="num">{{ num }}</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="mainImage">Main Image</label>
-                <input name="mainImage" id="mainImage" type="text" [(ngModel)]="selectedListing.mainImage" />
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="zipCode">Zip Code</label>
+                </div>
+                <div class="col-xs-10">
+                    <input name="zipCode" id="zipCode" type="text" [(ngModel)]="selectedListing.zipCode" required #zipcode="ngModel"/>
+                </div>
             </div>
-            <div class="form-group">
-                <button type="submit" title="Submit" class="btn btn-primary btn-lg">
-                    Submit
-                </button>
-                <button type="button" title="Cancel" class="btn btn-primary btn-lg" (click)="onCancelClick()">
-                    Cancel
-                </button>
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="price">Price</label>
+                </div>
+                <div class="col-xs-10">
+                    <input name="price" id="price" type="text" [(ngModel)]="selectedListing.price" />
+                </div>
             </div>
-
-        </form>
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="description">Description</label>
+                </div>
+                <div class="col-xs-10">
+                    <input name="description" id="description" type="text" [(ngModel)]="selectedListing.description" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="mainImage">Main Image</label>
+                </div>
+                <div class="col-xs-10">
+                    <input name="mainImage" id="mainImage" type="text" [(ngModel)]="selectedListing.mainImage" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <button type="submit" title="Submit" class="btn btn-primary btn-lg">
+                        Submit
+                    </button>
+                    <button type="button" title="Delete" class="btn btn-primary btn-lg" (click)="onDeleteClick()">
+                        Delete
+                    </button>
+                    <button type="button" title="Cancel" class="btn btn-primary btn-lg" (click)="onCancelClick()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+</form>
     </div>
 </div>
