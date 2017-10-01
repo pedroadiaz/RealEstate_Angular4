@@ -6,6 +6,7 @@ import { sharedConfig } from './app.module.shared';
 
 import { UserLoginService } from './components/services/userlogin.service';
 import { ListingService } from './components/services/listing.service';
+import { ImageService } from './components/services/image.service';
 
 @NgModule({
     bootstrap: sharedConfig.bootstrap,
@@ -19,6 +20,7 @@ import { ListingService } from './components/services/listing.service';
     providers: [
         UserLoginService,
         ListingService,
+        ImageService,
         { provide: 'ORIGIN_URL', useValue: location.origin }
     ]
 })

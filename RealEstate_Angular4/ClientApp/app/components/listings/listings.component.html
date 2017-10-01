@@ -9,6 +9,7 @@
                 <th>Bedrooms/Bathrooms</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Images</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
                 <td>{{ listing.bedrooms }}/{{ listing.bathrooms }}</td>
                 <td>{{ listing.description }}</td>
                 <td>${{ listing.price }}</td>
+                <td><a [routerLink]="['/images', listing.houseid]">View Images</a></td>
             </tr>
         </tbody>
     </table>

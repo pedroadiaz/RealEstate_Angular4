@@ -1,0 +1,63 @@
+﻿<div>
+    <h2>Images!</h2>
+    <p *ngIf="!images"><em>Loading...</em></p>
+    <a class="btn btn-info" [routerLink]="['/listings']">Back to listings</a>
+    <table class='table' *ngIf="images">
+        <thead>
+            <tr>
+                <th>Path</th>
+                <th>Description</th>
+                <th>Sort Order</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let img of images" (click)="onSelect(img)">
+                <td>{{ img.imagePath }}</td>
+                <td>{{ img.shortDescription }}</td>
+                <td>{{ img.sortOrder }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" title="Cancel" class="btn btn-primary btn-lg" (click)="addImage()">Add New Image</button>
+    <div *ngIf="selectedImage">
+        <form (ngSubmit)="onSubmit()" ng-form="#imageForm">
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="imagePath">Image Path</label>
+                </div>
+                <div class="col-xs-10">
+                    <input name="imagePath" id="imagePath" type="text" [(ngModel)]="selectedImage.imagePath" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="shortDescription">Description</label>
+                </div>
+                <div class="col-xs-10">
+                    <input name="shortDescription" id="shortDescription" type="text" [(ngModel)]="selectedImage.shortDescription" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    <label for="mainImage">Sort Order</label>
+                </div>
+                <div class="col-xs-10">
+                    <input name="sortOrder" id="sortOrder" type="text" [(ngModel)]="selectedImage.sortOrder" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <button type="submit" title="Submit" class="btn btn-primary btn-lg">
+                        Submit
+                    </button>
+                    <button type="button" title="Delete" class="btn btn-primary btn-lg" (click)="onDeleteClick()">
+                        Delete
+                    </button>
+                    <button type="button" title="Cancel" class="btn btn-primary btn-lg" (click)="onCancelClick()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

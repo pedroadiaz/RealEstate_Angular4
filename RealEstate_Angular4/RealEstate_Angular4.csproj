@@ -32,10 +32,13 @@
 
   <ItemGroup>
     <!-- Files not to show in IDE -->
+    <None Remove="ClientApp\app\components\images\image.component.ts" />
     <None Remove="ClientApp\app\components\listings\listings.component.ts" />
+    <None Remove="ClientApp\app\components\models\image.ts" />
     <None Remove="ClientApp\app\components\models\listing.ts" />
     <None Remove="ClientApp\app\components\models\property-type.enum.ts" />
     <None Remove="ClientApp\app\components\models\userlogin.ts" />
+    <None Remove="ClientApp\app\components\services\image.service.ts" />
     <None Remove="ClientApp\app\components\services\listing.service.ts" />
     <None Remove="ClientApp\app\components\services\permission.type.ts" />
     <None Remove="ClientApp\app\components\services\userlogin.service.ts" />
@@ -50,11 +53,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\images\image.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\listings\listings.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\models\image.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\models\listing.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\models\property-type.enum.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\models\userlogin.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\models\permission.type.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\services\image.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\services\listing.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\services\userlogin.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\bathrooms.ts" />

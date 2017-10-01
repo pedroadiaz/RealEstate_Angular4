@@ -1,5 +1,4 @@
 ﻿import { Component, Input, Output, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ListingService } from '../services/listing.service';
@@ -48,9 +47,6 @@ export class ListingsComponent implements OnInit {
         this.baths = new bathrooms();
         this.beds = new bedrooms();
 
-        console.log(this.baths.bathroomList);
-        console.log(this.beds.bedroomList);
-
         this.userinfo = JSON.parse(localStorage.getItem('currentUser'));
         this.loading = true;
         this.newListing = false;
@@ -83,7 +79,6 @@ export class ListingsComponent implements OnInit {
     public onDeleteClick() {
         this.listingService.DeleteListing(this.selectedListing)
             .then(listingData => {
-                console.log(this.selectedListing.houseid);
                 let element = this.listings.findIndex(listing => listing.houseid == this.selectedListing.houseid);
                 this.listings.splice(element);
                 this.selectedListing = null;
